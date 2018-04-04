@@ -117,15 +117,14 @@ class Accelerometer {
   }
 
   // read data from one (or several) register(s)
-  void Read(uint8_t reg, uint8_t *data, uint16_t size) {
+  void Read(uint8_t reg, uint8_t *data) {
     reg |= READWRITE_CMD;
-    if(size > 1) reg |= MULTIPLEBYTE_CMD;
 
     WriteCs(false);
     WriteRead(reg);
     /* Receive the data that will be read from the device (MSB First) */
-    uint8_t in[size] = {0};
-    if (HAL_SPI_TransmitReceive(&hspi_, in, data, size, 1000) != HAL_OK) {
+    uint8_t in[1] = {0};
+    if (HAL_SPI_TransmitReceive(&hspi_, in, data, 1, 1000) != HAL_OK) {
       while(1);
     }
     WriteCs(true);
@@ -194,12 +193,12 @@ public:
   };
 
   void ReadAccelData(AccelData *d) {
-    Read(LIS3DSH_OUT_X_L_ADDR, ((uint8_t*)&d->x), 1);
-    Read(LIS3DSH_OUT_X_H_ADDR, ((uint8_t*)&d->x)+1, 1);
-    Read(LIS3DSH_OUT_Y_L_ADDR, ((uint8_t*)&d->y), 1);
-    Read(LIS3DSH_OUT_Y_H_ADDR, ((uint8_t*)&d->y)+1, 1);
-    Read(LIS3DSH_OUT_Z_L_ADDR, ((uint8_t*)&d->z), 1);
-    Read(LIS3DSH_OUT_Z_H_ADDR, ((uint8_t*)&d->z)+1, 1);
+    Read(LIS3DSH_OUT_X_L_ADDR, ((uint8_t*)&d->x));
+    Read(LIS3DSH_OUT_X_H_ADDR, ((uint8_t*)&d->x)+1);
+    Read(LIS3DSH_OUT_Y_L_ADDR, ((uint8_t*)&d->y));
+    Read(LIS3DSH_OUT_Y_H_ADDR, ((uint8_t*)&d->y)+1);
+    Read(LIS3DSH_OUT_Z_L_ADDR, ((uint8_t*)&d->z));
+    Read(LIS3DSH_OUT_Z_H_ADDR, ((uint8_t*)&d->z)+1);
   }
 
 };
