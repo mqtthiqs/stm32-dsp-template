@@ -6,6 +6,8 @@
 #include "system.hh"
 #include "accelerometer.hh"
 
+#include "dsp.hh"
+
 struct Main :
   System::SysTickCallback,
   DacAndMic::ProcessCallback {
@@ -31,7 +33,7 @@ struct Main :
   }
 
   void onSysTick() {
-    if (HAL_GetTick() % 64 == 0) {
+    if (system_.milliseconds() % 64 == 0) {
       leds_.set((LED)(led/2), !(led&1));
       led = (led+1) % 8;
     }

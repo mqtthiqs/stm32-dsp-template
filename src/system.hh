@@ -24,6 +24,8 @@ struct System {
     void onSysTick() {}
   } default_callback;
 
+  uint32_t milliseconds() { return HAL_GetTick(); }
+
   /**
    * @brief  System Clock Configuration
    *         The system Clock is configured as follow :
