@@ -1,12 +1,9 @@
 #include "debug_pins.hh"
-#include "internal_dac.hh"
 #include "leds.hh"
 #include "button.hh"
 #include "dac_and_mic.hh"
 #include "system.hh"
 #include "accelerometer.hh"
-
-#include "dsp.hh"
 
 struct Main :
   System::SysTickCallback,
@@ -18,7 +15,6 @@ struct Main :
   DacAndMic dam_ {I2S_FREQ_48000, this};
   Accelerometer accel_;
 
-  int led = 0;
   Accelerometer::AccelData d;
 
   void Process(short *in, ShortFrame *out, size_t size) {
