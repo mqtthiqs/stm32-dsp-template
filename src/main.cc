@@ -9,6 +9,8 @@ struct Main :
   System::SysTickCallback,
   DacAndMic::ProcessCallback {
 
+  int led;
+
   System system_ {this};
   Leds leds_;
   Button button_;
