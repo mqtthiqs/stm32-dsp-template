@@ -107,5 +107,4 @@ extern "C" {
   void __cxa_pure_virtual() { while (1); }
   __weak void _init() {}
   __weak int main() {}
-  int __errno;
 }
