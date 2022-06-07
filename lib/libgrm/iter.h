@@ -107,7 +107,7 @@ class zip {
   using reference = typename iterator::reference;
 
   constexpr explicit zip(Ranges&&... rs) : ranges {std::forward<Ranges>(rs)...} {
-    assert(all_equal(int(std::size(rs))...));
+    // assert(all_equal(int(std::size(rs))...));
   }
 
   constexpr iterator begin() {
