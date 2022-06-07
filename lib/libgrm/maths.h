@@ -102,7 +102,7 @@ struct Math {
     static_assert(is_power_of_2(log2_size));
     constexpr int const BITS = ilog2(log2_size);
 
-    x *= f(1UL << shift);
+    x *= f(1ULL << shift);
 
     auto c = f::BinRepr(x);
     c.setExponent(c.exponent() - 127);
