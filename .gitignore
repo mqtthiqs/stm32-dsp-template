@@ -1,0 +1,5 @@
+*.o
+/.vscode
+.DS_Store
+main.bin
+main.elf
