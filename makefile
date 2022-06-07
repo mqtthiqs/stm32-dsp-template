@@ -18,7 +18,7 @@ HAL = 	stm32f4xx_hal.o \
 	stm32f4xx_hal_dac.o \
 
 OPTIM ?= 0
-TOOLCHAIN_DIR ?=
+TOOLCHAIN_DIR ?= /Applications/ARM/bin/
 
 CXX = $(TOOLCHAIN_DIR)arm-none-eabi-g++
 CC = $(TOOLCHAIN_DIR)arm-none-eabi-gcc
