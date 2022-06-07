@@ -123,8 +123,8 @@ struct Float {
   }
 
   constexpr T scale(Pair<T> const sourceRange, Pair<T> const targetRange) const noexcept {
-    assert(sourceRange.second !=
-           sourceRange.first);  // mapping from a range of zero will produce NaN!
+    // assert(sourceRange.second !=
+    //        sourceRange.first);  // mapping from a range of zero will produce NaN!
     return targetRange.first + (targetRange.second - targetRange.first) *
                                    (*this - sourceRange.first) /
                                    (sourceRange.second - sourceRange.first);
@@ -277,8 +277,8 @@ struct Fixed {
 
   // from base type:
   constexpr explicit Fixed(Base const x) noexcept : val_(x * kOne) {
-    assert(x >= min_val<T>.repr() >> FRAC);
-    assert(x <= max_val<T>.repr() >> FRAC);
+    // assert(x >= min_val<T>.repr() >> FRAC);
+    // assert(x <= max_val<T>.repr() >> FRAC);
   }
 
   // from base types, for literal notations (see below)
