@@ -58,6 +58,7 @@ CXXFLAGS=$(CFLAGS) \
 	-std=c++11 \
 	-fno-rtti \
 	-fno-exceptions \
+	-Wno-psabi \
 
 LDFLAGS= $(ARCHFLAGS) -T $(LDSCRIPT) \
 	-Wl,--gc-sections \
