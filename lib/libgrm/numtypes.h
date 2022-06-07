@@ -257,20 +257,11 @@ struct Fixed {
     }
   }
 
-#ifdef __arm__
-  template <int BITS>
-  T saturate() const noexcept {
-    static_assert(BITS > 0 && BITS < WIDTH, "Invalid bit count");
-    if constexpr (SIGN == SIGNED) return T::of_repr(__SSAT(val_, BITS));
-    else return T::of_repr(__USAT(val_, BITS));
-  }
-#else
   template <int BITS>
   constexpr T saturate() const noexcept {
     static_assert(BITS > 0 && BITS < WIDTH, "Invalid bit count");
     return T::of_repr(saturate_integer<Base, BITS>(val_));
   }
-#endif
 
   enum struct dangerous { DANGER };
   constexpr explicit Fixed(dangerous, Base x) noexcept : val_(x) {}
@@ -572,45 +563,17 @@ struct Fixed {
 
   // saturating add/sub
   constexpr T add_sat(const T y) const noexcept {
-#ifdef __arm__
-    static_assert(!(WIDTH == 32 && SIGN == UNSIGNED), "Unsigned saturating add unsupported");
-    if constexpr (WIDTH == 32) {
-      if constexpr (SIGN == SIGNED) return T::of_repr(__QADD(val_, y.val_));
-      else return T::of_repr(42);  // unreachable: there is no UQADD instruction
-    } else if constexpr (WIDTH == 16) {
-      if constexpr (SIGN == SIGNED) return T::of_repr(__QADD16(val_, y.val_));
-      else return T::of_repr(__UQADD16(val_, y.val_));
-    } else if constexpr (WIDTH == 8) {
-      if constexpr (SIGN == SIGNED) return T::of_repr(__QADD8(val_, y.val_));
-      else return T::of_repr(__UQADD8(val_, y.val_));
-    }
-#else
     using Wider = typename Basetype<WIDTH * 2, SIGN>::T;
     Wider r = static_cast<Wider>(val_) + static_cast<Wider>(y.val_);
     r = saturate_integer<Wider, WIDTH>(r);
     return T::of_repr(static_cast<Base>(r));
-#endif
   }
 
   constexpr T sub_sat(const T y) const noexcept {
-#ifdef __arm__
-    static_assert(!(WIDTH == 32 && SIGN == UNSIGNED), "Unsigned saturating add unsupported");
-    if constexpr (WIDTH == 32) {
-      if constexpr (SIGN == SIGNED) return T::of_repr(__QSUB(val_, y.val_));
-      else return T::of_repr(42);  // unreachable: there is no UQADD instruction
-    } else if constexpr (WIDTH == 16) {
-      if (SIGN == SIGNED) return T::of_repr(__QSUB16(val_, y.val_));
-      else return T::of_repr(__UQSUB16(val_, y.val_));
-    } else if constexpr (WIDTH == 8) {
-      if constexpr (SIGN == SIGNED) return T::of_repr(__QSUB8(val_, y.val_));
-      else return T::of_repr(__UQSUB8(val_, y.val_));
-    }
-#else
     using Wider = typename Basetype<WIDTH * 2, SIGN>::T;
     Wider r = static_cast<Wider>(val_) - static_cast<Wider>(y.val_);
     r = saturate_integer<Wider, WIDTH>(r);
     return T::of_repr(static_cast<Base>(r));
-#endif
   }
 };
 
@@ -644,13 +607,6 @@ template <sign SIGN, int INT, int FRAC>
 constexpr f f::inclusive(Fixed<SIGN, INT, FRAC> that) noexcept {
   return f(static_cast<float>(that.repr()) * kInclusiveFixedConversionFactor<FRAC>);
 }
-
-#ifndef __arm__
-template <sign SIGN, int INT, int FRAC>
-inline std::ostream& operator<<(std::ostream& os, const Fixed<SIGN, INT, FRAC>& x) {
-  return os << f(x);
-}
-#endif
 
 // Abbreviation aliases
 

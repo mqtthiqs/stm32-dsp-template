@@ -6,6 +6,7 @@
 #include <cstring>
 #include <functional>
 #include <tuple>
+#include <cstdint>
 
 namespace grm {
 
