@@ -36,14 +36,14 @@ INC =   -I src/ \
 
 LDSCRIPT = $(CMSIS_DIR)/STM32F407VGTx_FLASH.ld
 
-ARCHFLAGS =  	-mcpu=cortex-m4 \
+ARCHFLAGS = -mcpu=cortex-m4 \
 		-mthumb \
 		-mfloat-abi=hard \
 		-mfpu=fpv4-sp-d16 \
 		-mthumb-interwork \
 		-DSTM32F407xx \
 
-CPPFLAGS= $(INC)
+CPPFLAGS= $(INC) -std=c++17
 
 CFLAGS= $(ARCHFLAGS) \
 	-g \
