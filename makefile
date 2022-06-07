@@ -27,12 +27,14 @@ GDB = $(TOOLCHAIN_DIR)arm-none-eabi-gdb
 
 CMSIS_DIR = lib/CMSIS/
 HAL_DIR = lib/HAL/
+GRM_DIR = lib/libgrm/
 
 INC =   -I src/ \
 	-I . \
 	-I lib/DSP/ \
 	-I $(CMSIS_DIR) \
 	-I $(HAL_DIR) \
+	-I $(GRM_DIR) \
 
 LDSCRIPT = $(CMSIS_DIR)/STM32F407VGTx_FLASH.ld
 
