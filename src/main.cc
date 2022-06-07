@@ -5,6 +5,20 @@
 #include "system.hh"
 #include "accelerometer.hh"
 
+#include "numtypes.h"
+
+using namespace grm;
+
+struct Oscillator {
+
+  f process() {
+    phase += 0.0001_f;
+    return phase * 2_f - 1_f;
+  }
+  private:
+  f phase = 0_f;
+};
+
 struct Main :
   System::SysTickCallback,
   DacAndMic::ProcessCallback {
@@ -40,6 +54,6 @@ struct Main :
   Main() {
     dam_.set_output_volume(200);
     dam_.Start();
-    while(1) { }
+    while(1) { __WFI(); }
   }
 } _;
