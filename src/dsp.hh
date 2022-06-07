@@ -7,7 +7,7 @@ struct Random {
     return state();
   }
   static inline int16_t Short() { return Int() >> 16; }
-  static inline float Float() { return (float)Int() / 4294967296.0f; }
+  static inline float Float() { return (float)Int() / float(-1U); }
 private:
   static uint32_t state_;
 };
