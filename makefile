@@ -72,7 +72,7 @@ OBJS += $(STARTUP).o \
 all: $(TARGET).bin
 
 %.elf: $(OBJS)
-	$(CC) $(LDFLAGS) -o $@ $(OBJS) $(LIBS)
+	$(CXX) $(LDFLAGS) -o $@ $(OBJS) $(LIBS)
 
 %.bin: %.elf
 	$(OBJCOPY) -O binary $< $@
