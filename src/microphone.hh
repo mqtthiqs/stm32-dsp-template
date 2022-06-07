@@ -108,9 +108,7 @@ public:
 
   void Process(int offset) {
     uint8_t *pdm_buf = &pdm_block_[offset * kPdmBlockSize];
-    debug.on(2);
     filter_.Process(pdm_buf, pcm_block_, kBlockSize);
-    debug.off(2);
     callback_->Process(pcm_block_, kBlockSize);
   }
 };

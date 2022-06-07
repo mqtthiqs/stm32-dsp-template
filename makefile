@@ -17,7 +17,11 @@ HAL = 	stm32f4xx_hal.o \
 	stm32f4xx_hal_spi.o \
 	stm32f4xx_hal_dac.o \
 
-OPTIM ?= 0
+GRM = \
+
+src/main.o: src/processor.hh src/debug_pins.hh src/leds.hh src/button.hh src/dac_and_mic.hh src/system.hh src/accelerometer.hh
+
+OPTIM ?= 2
 TOOLCHAIN_DIR ?= /Applications/ARM/bin/
 
 CXX = $(TOOLCHAIN_DIR)arm-none-eabi-g++
@@ -71,6 +75,7 @@ SYSTEM = $(CMSIS_DIR)system_stm32f4xx
 OBJS += $(STARTUP).o \
 	$(SYSTEM).o \
 	$(addprefix $(HAL_DIR), $(HAL)) \
+	$(addprefix $(GRM_DIR), $(GRM)) \
 
 all: $(TARGET).bin
 

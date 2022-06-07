@@ -1,4 +1,7 @@
+#pragma once
+
 #include "stm32f4xx.h"
+#include "numtypes.h"
 
 #define LIS3DSH_OUT_T_ADDR                   0x0C
 #define LIS3DSH_INFO1_ADDR                   0x0D
@@ -187,9 +190,9 @@ public:
   }
 
   struct AccelData {
-    short x;
-    short y;
-    short z;
+    grm::s1_15 x;
+    grm::s1_15 y;
+    grm::s1_15 z;
   };
 
   void ReadAccelData(AccelData *d) {

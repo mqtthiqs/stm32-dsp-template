@@ -1,6 +1,11 @@
 #include "stm32f4xx.h"
 #include "parameters.hh"
 
+#include "array.h"
+#include "numtypes.h"
+
+using namespace grm;
+
 class Dac
 {
   ShortFrame block_[kBlockSize * 2] = {zero};
@@ -53,7 +58,7 @@ public:
   static DMA_HandleTypeDef hdma_;
   
   struct ProcessCallback {
-    virtual void Process(ShortFrame* out, size_t size) = 0;
+    virtual void Process(Array<Pair<s1_15>, kBlockSize>&) = 0;
   };
 
 private:
@@ -262,7 +267,8 @@ public:
 
   void Process(int offset) {
     ShortFrame *out = &block_[offset * kBlockSize];
-    callback_->Process(out, kBlockSize);
+    auto& arr = reinterpret_cast<Array<Pair<s1_15>, kBlockSize>&>(*out);
+    callback_->Process(arr);
   }
 
   // 0..255, from -100dB to +12dB
