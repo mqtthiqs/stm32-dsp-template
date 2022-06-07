@@ -84,10 +84,16 @@ clean:
 	rm -f $(OBJS) $(TARGET).elf $(TARGET).bin
 
 flash: $(TARGET).bin
-	st-flash write $< 0x8000000
+	openocd -f interface/stlink.cfg \
+		-c "adapter speed 4000; transport select hla_swd" \
+		-f target/stm32f4x.cfg \
+		-c "program main.bin verify reset exit 0x08000000" \
 
 erase:
-	st-flash erase
+	openocd -f interface/stlink.cfg \
+		-c "adapter speed 4000; transport select hla_swd" \
+		-f target/stm32f4x.cfg \
+		-c "init; halt; stm32f4x mass_erase 0; exit" \
 
 debug:
 	$(TOOLCHAIN_DIR)arm-none-eabi-gdb $(TARGET).elf --eval-command="target remote localhost:3333"
