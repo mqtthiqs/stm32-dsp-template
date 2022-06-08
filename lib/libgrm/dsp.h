@@ -4,6 +4,7 @@
 #include <cstdint>   // for int16_t, uint32_t, UINT32_MAX, INT32_MAX
 #include <optional>  // for optional
 #include <utility>   // for pair
+#include <atomic>
 
 #include "buffer.h"     // for Buffer, DynBuffer, RingBuffer
 #include "filter.h"     // for OnePoleHpFromCoef, NonLinearOnePoleLp
