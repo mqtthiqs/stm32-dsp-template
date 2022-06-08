@@ -1,5 +1,7 @@
-#include "microphone.hh"
-#include "dac.hh"
+#pragma once
+
+#include "microphone.h"
+#include "dac.h"
 
 class DacAndMic :
   Dac,

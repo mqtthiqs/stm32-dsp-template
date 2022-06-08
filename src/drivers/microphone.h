@@ -1,5 +1,7 @@
-#include "parameters.hh"
-#include "dsp.hh"
+#pragma once
+
+#include "parameters.h"
+#include "dsp.h"
 
 class Microphone {
 

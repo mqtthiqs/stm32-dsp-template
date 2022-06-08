@@ -1,13 +1,13 @@
-#include "accelerometer.hh"
-#include "button.hh"
-#include "dac_and_mic.hh"
-#include "debug_pins.hh"
 #include "grm.h"
-#include "leds.hh"
-#include "system.hh"
 
-#include "numtypes.h"
-#include "processor.hh"
+#include "drivers/accelerometer.h"
+#include "drivers/button.h"
+#include "drivers/dac.h"
+#include "drivers/debug_pins.h"
+#include "drivers/leds.h"
+#include "drivers/system.h"
+
+#include "processor.h"
 
 struct Main : System::SysTickCallback, Dac::ProcessCallback {
   System system_{this};

@@ -1,5 +1,7 @@
+#pragma once
+
 #include "stm32f4xx.h"
-#include "parameters.hh"
+#include "parameters.h"
 
 #include "array.h"
 #include "numtypes.h"

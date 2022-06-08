@@ -1,8 +1,9 @@
 #pragma once
 
-#include "accelerometer.hh"
+#include "drivers/accelerometer.h"
+#include "parameters.h"
+
 #include "grm.h"
-#include "parameters.hh"
 
 using namespace grm;
 

@@ -19,8 +19,6 @@ HAL = 	stm32f4xx_hal.o \
 
 GRM = \
 
-src/main.o: src/processor.hh src/debug_pins.hh src/leds.hh src/button.hh src/dac_and_mic.hh src/system.hh src/accelerometer.hh
-
 OPTIM ?= 2
 TOOLCHAIN_DIR ?= /Applications/ARM/bin/
 
@@ -109,8 +107,7 @@ debug:
 
 .PRECIOUS: $(OBJS) $(TARGET).elf
 
-# File dependencies:
-src/main.o: src/leds.hh src/dac.hh src/button.hh src/system.hh \
-	    src/debug_pins.hh src/microphone.hh \
-	    src/dac_and_mic.hh src/accelerometer.hh \
-	    src/parameters.hh src/internal_dac.hh \
+src/main.o: src/processor.h src/drivers/debug_pins.h \
+   		src/drivers/leds.h src/drivers/button.h \
+		src/drivers/dac_and_mic.h src/drivers/system.h \
+		 src/drivers/accelerometer.h
