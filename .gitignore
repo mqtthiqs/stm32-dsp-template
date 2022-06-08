@@ -1,6 +1,4 @@
-*.o
-/.vscode
+/.vscode/
+/.cache/
+/build/
 .DS_Store
-main.bin
-main.elf
-build/
