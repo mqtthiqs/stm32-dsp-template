@@ -26,20 +26,20 @@ private:
 struct Processor {
   f process(Accelerometer::AccelData &accel) {
 
-    f note = f(accel.y);
-    note = note.scale({-1_f, 1_f}, {0_f, 1_f}).cube();
-    note = note.scale({0_f, 1_f}, {0.0001_f, 0.1_f});
+    f freq = f(accel.y);
+    freq = freq.scale({-1_f, 1_f}, {0_f, 1_f}).cube();
+    freq = freq.scale({0_f, 1_f}, {0.0001_f, 0.2_f});
 
     f amp = f(accel.x).square();
 
     f sum = 0_f;
     for (auto [n, osc] : enumerate(osc_)) {
-      osc.setFreq(note / f(n+1));
+      osc.setFreq(freq / f(n+1));
       sum += osc.process() * amp;
     }
     return sum / f(osc_.size());
   }
 
 private:
-  Array<Oscillator, 10> osc_;
+  Array<Oscillator, 3> osc_;
 };

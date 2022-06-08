@@ -23,7 +23,7 @@ struct Main : System::SysTickCallback, Dac::ProcessCallback {
     accel_.ReadAccelData(&d);
 
     for (auto &[x, y] : out) {
-      x = y = s1_15::inclusive(processor_.process(d));
+      x = y = s1_15::inclusive(processor_.process(d).clip());
     }
   }
 
