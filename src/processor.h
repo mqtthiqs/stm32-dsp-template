@@ -24,7 +24,7 @@ private:
 };
 
 struct Processor {
-  f process(Accelerometer::AccelData &accel) {
+  f process(AccelData &accel) {
 
     f freq = f(accel.y);
     freq = freq.scale({-1_f, 1_f}, {0_f, 1_f}).cube();

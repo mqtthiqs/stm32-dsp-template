@@ -189,13 +189,13 @@ public:
     Write(LIS3DSH_FIFO_CTRL_ADDR, &ctrl, 1);
   }
 
-  struct AccelData {
+  struct Data {
     grm::s1_15 x;
     grm::s1_15 y;
     grm::s1_15 z;
   };
 
-  void ReadAccelData(AccelData *d) {
+  void ReadAccelData(Data *d) {
     Read(LIS3DSH_OUT_X_L_ADDR, ((uint8_t*)&d->x));
     Read(LIS3DSH_OUT_X_H_ADDR, ((uint8_t*)&d->x)+1);
     Read(LIS3DSH_OUT_Y_L_ADDR, ((uint8_t*)&d->y));
@@ -205,3 +205,5 @@ public:
   }
 
 };
+
+using AccelData = Accelerometer::Data;

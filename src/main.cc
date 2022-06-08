@@ -16,7 +16,7 @@ struct Main : System::SysTickCallback, Dac::ProcessCallback {
   Dac dac_{I2S_FREQ_48000, this};
   Accelerometer accel_;
 
-  Accelerometer::AccelData d;
+  AccelData d;
   Processor processor_;
 
   void Process(Array<Pair<s1_15>, kBlockSize> &out) {
