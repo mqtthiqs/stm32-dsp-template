@@ -1,6 +1,6 @@
 #pragma once
 
-#include "stm32f4xx.h"
+#include "stm32f4xx_hal.h"
 #include "numtypes.h"
 
 #define LIS3DSH_OUT_T_ADDR                   0x0C
