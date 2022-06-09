@@ -3,6 +3,7 @@
 #include "stm32f4xx_hal.h"
 #include "parameters.h"
 
+#include "debug_pins.h"
 #include "array.h"
 #include "numtypes.h"
 
@@ -283,8 +284,10 @@ public:
 };
 
 extern "C" {
-  void DMA1_Stream7_IRQHandler() {
+void DMA1_Stream7_IRQHandler() {
+    debug.on(1);
     HAL_DMA_IRQHandler(&Dac::hdma_);
+    debug.off(1);
   }
 
   void HAL_I2S_TxHalfCpltCallback(I2S_HandleTypeDef *hi2s_) {
