@@ -16,5 +16,5 @@ enum I2S_Freq {
   I2S_FREQ_96000 = 7,
 };
 
-constexpr int kBlockSize = 32;
-constexpr int kSampleRate = 48000;
+constexpr int kBlockSize = 1;
+constexpr int kSampleRate = 48367;

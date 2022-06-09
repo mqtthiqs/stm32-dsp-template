@@ -173,7 +173,7 @@ public:
     hi2s_.Instance = SPI3;
     __HAL_I2S_DISABLE(&hi2s_);
 
-    hi2s_.Init.AudioFreq   = I2SFreq[freq];
+    hi2s_.Init.AudioFreq   = 145000;
     hi2s_.Init.ClockSource = I2S_CLOCK_PLL;
     hi2s_.Init.CPOL        = I2S_CPOL_LOW;
     hi2s_.Init.DataFormat  = I2S_DATAFORMAT_16B;
