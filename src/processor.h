@@ -14,7 +14,7 @@ struct Oscillator {
     if (phase_ > 1_f)
       phase_--;
 
-    return Math::sin(phase_ * 2_f * Math::pi);
+    return Math::sine(phase_);
   }
 
   void setFreq(f freq) { freq_ = freq; }
