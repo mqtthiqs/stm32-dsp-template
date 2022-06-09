@@ -1,6 +1,6 @@
 #pragma once
 
-#include <cassert>  // for assert
+// #include <cassert>  // for assert
 #include <cmath>    // for exp2, tanf
 #include <cstdint>  // for uint32_t
 
@@ -11,6 +11,7 @@
 namespace grm {
 
 struct Math {
+
   static constexpr f pi = 3.14159265358979323846264338327950288_f;
   static constexpr f pi_pow_2 = Math::pi * Math::pi;
   static constexpr f pi_pow_3 = pi_pow_2 * Math::pi;
@@ -98,7 +99,7 @@ struct Math {
   // fast_log2 : [1/(1<<shift) .. inf] -> [-inf .. inf]
   template <int shift = 32>
   static s9_23 fast_log2(f x) {
-    assert(x >= 1_f / f(1ULL << shift));
+    // assert(x >= 1_f / f(1ULL << shift));
     static_assert(is_power_of_2(log2_size));
     constexpr int const BITS = ilog2(log2_size);
 
@@ -192,7 +193,7 @@ struct Math {
   }
 
   static constexpr int gauss_sum(int n) {
-    assert(n > 0);
+    // assert(n > 0);
     return n * (n - 1) / 2;
   }
 
