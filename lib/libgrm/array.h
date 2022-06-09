@@ -104,12 +104,12 @@ struct CopyableArray : std::array<T, size_t(SIZE)> {
     constexpr T const* data() const noexcept { return data_; }
 
     constexpr T& operator[](int const i) noexcept {
-      assert(i < size());
+      // assert(i < size());
       return data_[i];
     }
 
     constexpr T const& operator[](int const i) const noexcept {
-      assert(i < size());
+      // assert(i < size());
       return data_[i];
     }
 
