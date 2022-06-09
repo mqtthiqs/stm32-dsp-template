@@ -209,7 +209,8 @@ public:
     HAL_DMA_Init(&hdma_);
 
     /* I2S DMA IRQ Channel configuration */
-    HAL_NVIC_SetPriority(DMA1_Stream7_IRQn, 0x0F, 0);
+    // give max priority to DAC IRQ
+    HAL_NVIC_SetPriority(DMA1_Stream7_IRQn, 0, 0);
     HAL_NVIC_EnableIRQ(DMA1_Stream7_IRQn);
 }
 
