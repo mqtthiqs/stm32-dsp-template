@@ -28,7 +28,7 @@ struct Main : Math, System::SysTickCallback, Dac::ProcessCallback {
 
   void onSysTick() {
     static int led;
-    if (system_.milliseconds() % 64 == 0) {
+    if (system_.milliseconds() % 8 == 0) {
       leds_.set((LED)(led / 2), !(led & 1));
       led = (led + 1) % 8;
     }
