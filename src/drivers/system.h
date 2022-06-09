@@ -12,10 +12,12 @@ struct System {
 
   static System *instance_;
   System() {
-    SystemClock_Config();
     HAL_Init();
-    // SysTick takes priority over everything
-    HAL_NVIC_SetPriority(SysTick_IRQn, 0, 0);
+    SystemClock_Config();
+    // manually set SysTick freq to 100Hz
+    HAL_SYSTICK_Config(1680000);
+    // SysTick takes priority over nothing
+    HAL_NVIC_SetPriority(SysTick_IRQn, 10, 0);
   }
   System(SysTickCallback *cb) : cb_(cb) {
     instance_ = this;
@@ -26,7 +28,7 @@ struct System {
     void onSysTick() {}
   } default_callback;
 
-  uint32_t milliseconds() { return HAL_GetTick(); }
+  uint32_t milliseconds() { return HAL_GetTick() * 10; }
 
   /**
    * @brief  System Clock Configuration
