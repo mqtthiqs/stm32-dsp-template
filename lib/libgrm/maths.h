@@ -11,6 +11,13 @@
 namespace grm {
 
 struct Math {
+  Math() {
+    cosine_table = CosineTable();
+    sine_table = SineTable();
+    exp2_table = Exp2Table();
+    log2_table = Log2Table();
+    xfade_table = XFadeTable();
+  }
 
   static constexpr f pi = 3.14159265358979323846264338327950288_f;
   static constexpr f pi_pow_2 = Math::pi * Math::pi;
@@ -204,26 +211,26 @@ struct Math {
   static constexpr double exp2_increment = 1.000084616272694313202633;  // 2 ^ (1/exp2_size)
   struct Exp2Table : Array<uint32_t, exp2_size> {
     Exp2Table() noexcept;
-  } static const exp2_table;
+  } static exp2_table;
 
   static constexpr int log2_size = 1024;
   struct Log2Table : Array<uint32_t, log2_size> {
     Log2Table() noexcept;
-  } static const log2_table;
+  } static log2_table;
 
   static constexpr int xfade_size = 32;
   struct XFadeTable : DiffBuffer<f, xfade_size + 1> {
     XFadeTable() noexcept;
-  } static const xfade_table;
+  } static xfade_table;
 
   static constexpr int sine_size = 1024;
   struct SineTable : DiffBuffer<f, sine_size + 1> {
     SineTable() noexcept;
-  } static const sine_table;
+  } static sine_table;
 
   struct CosineTable : DiffBuffer<f, sine_size + 1> {
     CosineTable() noexcept;
-  } static const cosine_table;
+  } static cosine_table;
 };
 
 // overload for std::complex

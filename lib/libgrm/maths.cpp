@@ -54,9 +54,8 @@ Math::XFadeTable::XFadeTable() noexcept {
   }
 }
 
-Math::Exp2Table const Math::exp2_table;
-Math::Log2Table const Math::log2_table;
-
-Math::XFadeTable const Math::xfade_table;
-Math::SineTable const Math::sine_table;
-Math::CosineTable const Math::cosine_table;
+Math::Exp2Table Math::exp2_table {};
+Math::Log2Table Math::log2_table {};
+Math::XFadeTable Math::xfade_table {};
+Math::SineTable  Math::sine_table {};
+Math::CosineTable Math::cosine_table {};

@@ -9,7 +9,7 @@
 
 #include "processor.h"
 
-struct Main : System::SysTickCallback, Dac::ProcessCallback {
+struct Main : Math, System::SysTickCallback, Dac::ProcessCallback {
   System system_{this};
   Leds leds_;
   Button button_;
