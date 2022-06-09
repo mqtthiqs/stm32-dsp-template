@@ -20,7 +20,6 @@ struct Main : System::SysTickCallback, Dac::ProcessCallback {
   Processor processor_;
 
   void Process(Array<Pair<s1_15>, kBlockSize> &out) {
-    accel_.ReadAccelData(&d);
 
     for (auto &[x, y] : out) {
       x = y = s1_15::inclusive(processor_.process(d).clip());
@@ -36,9 +35,10 @@ struct Main : System::SysTickCallback, Dac::ProcessCallback {
   }
 
   Main() {
-    dac_.set_volume(200);
+    dac_.set_volume(210);
     dac_.Start();
     while (1) {
+      accel_.ReadAccelData(&d);
       __WFI();
     }
   }
