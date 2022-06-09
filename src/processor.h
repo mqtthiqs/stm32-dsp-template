@@ -28,18 +28,24 @@ struct Processor {
 
     f freq = f(accel.y);
     freq = freq.scale({-1_f, 1_f}, {0_f, 1_f}).cube();
-    freq = freq.scale({0_f, 1_f}, {0.0001_f, 0.2_f});
+    freq = freq.scale({0_f, 1_f}, {0.00001_f, 0.2_f});
+    smoothFreq += (freq - smoothFreq) * (freq - smoothFreq).abs() * 0.5_f;
 
-    f amp = f(accel.x).square();
+    f amp = Math::fast_raised_cosine(f(accel.x));
+    smoothAmp += (amp - smoothAmp) * (amp - smoothAmp).abs() * 0.5_f;
+
+    amp = smoothAmp;
+    freq = smoothFreq;
 
     f sum = 0_f;
     for (auto [n, osc] : enumerate(osc_)) {
-      osc.setFreq(freq / f(n+1));
-      sum += osc.process() * amp;
+      osc.setFreq(freq * f(n+1));
+      sum += osc.process() * amp / f(n+1);
     }
     return sum / f(osc_.size());
   }
 
-private:
-  Array<Oscillator, 3> osc_;
+ private:
+  f smoothFreq = 0_f, smoothAmp=0_f;
+  Array<Oscillator, 1> osc_;
 };
